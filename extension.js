@@ -72,7 +72,7 @@ class MyPopup extends PanelMenu.Button {
         /*  let suspend = new PopupMenu.PopupMenuItem('Suspend');
           sessionMenu.menu.addMenuItem(Suspend);
           logout.connect('activate', () => Util.spawn(['systemctl', 'suspend']));
-        */  
+        */
           //reboot
           let reboot = new PopupMenu.PopupMenuItem('Reboot');
           sessionMenu.menu.addMenuItem(reboot);
@@ -81,7 +81,7 @@ class MyPopup extends PanelMenu.Button {
           //shutdown
           let shutdown = new PopupMenu.PopupMenuItem('Shutdown');
           sessionMenu.menu.addMenuItem(shutdown);
-          shutdown.connect('activate', () => Util.spawn(['gnome-session-quit' , '--shutdown']));
+          shutdown.connect('activate', () => Util.spawn(['gnome-session-quit' , '--power-off']));
   }
 
 });
