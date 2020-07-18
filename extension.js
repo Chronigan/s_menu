@@ -8,6 +8,24 @@ const ThisExtension = imports.misc.extensionUtils.getCurrentExtension();
 const Util = imports.misc.util;
 
 let myPopup;
+let packageManager;
+
+//Get SettingsSchemaSource
+
+function getSettings() {
+  let GioSSS = Gio.SettingsSchemaSource;
+  let schemaSource = GioSSS.new_from_directory(
+    ThisExtension.dir.get_child("schemas").get_path(),
+    GioSSS.get_default(),
+    false
+  );
+  let schemaObj = schemaSource.lookup(
+    'org.gnome.shell.extensions.s_menu', true);
+  if (!schemaObj) {
+    throw new Error('cannot find schemas');
+  }
+  return new Gio.Settings({ settings_schema : schemaObj });
+}
 
 //creates the menu class
 const MyPopup = GObject.registerClass(
@@ -27,10 +45,12 @@ class MyPopup extends PanelMenu.Button {
       systemMonitor.connect('activate', () => Util.spawn(['gnome-system-monitor']));
 
       //Pamac
-      let addRemove = new PopupMenu.PopupMenuItem('Add/Remove Software');
-      this.menu.addMenuItem(addRemove);
-      addRemove.connect('activate', () => Util.spawn(['pamac-manager']))
-
+      if(packageManager = !"null")
+      {
+        let addRemove = new PopupMenu.PopupMenuItem('Add/Remove Software');
+        this.menu.addMenuItem(addRemove);
+        addRemove.connect('activate', () => Util.spawn([packageManager]));
+      };
         //Settings submenu
         let  settingsMenu = new PopupMenu.PopupSubMenuMenuItem('Settings');
         this.menu.addMenuItem(settingsMenu);
@@ -86,14 +106,18 @@ class MyPopup extends PanelMenu.Button {
 
 });
 
-function init() {
-}
+function init()
+{
+  packageManager = getSettings().get_string('package-manager');
+};
 
-function enable() {
+function enable()
+{
   myPopup = new MyPopup();
   Main.panel.addToStatusArea('myPopup', myPopup, 1, 'left');
 }
 
-function disable() {
+function disable()
+{
   myPopup.destroy();
 }
