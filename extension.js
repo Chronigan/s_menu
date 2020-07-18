@@ -17,7 +17,7 @@ class MyPopup extends PanelMenu.Button {
 
     super._init(0);
     //Place icon on top menu
-    let icon = new St.Icon({icon_name : 'gnome-main-menu', style_class : 'system-status-icon',});
+    let icon = new St.Icon({gicon : Gio.icon_new_for_string( ThisExtension.dir.get_path() + '/icon.png' ), style_class : 'system-status-icon',});
     this.add_child(icon);
 
     //populate the menu

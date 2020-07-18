@@ -1,10 +1,10 @@
 {
-	"description" : "Creates a small system utility window in the right side of the panel",
-	"name" : "Gnome System Menu",
+	"description" : "Creates a small system utility window in the left side of the panel",
+	"name" : "Gnome System Menu - Dev",
 	"shell-version" : [
 		"3.36"
 	],
 	"url" : "https://github.com/Chronigan/s_menu",
 	"uuid" : "s_menu",
-	"version" : 0
+	"version" : "2"
 }
