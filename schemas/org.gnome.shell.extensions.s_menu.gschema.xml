@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schemalist>
+<schemalist gettext-domain="gnome-shell-extensions">
 
-  <schema id="org.gnome.shell.extensions.s_menu"
-    path="/org/gnome/shell/extensions/s_menu/">
+  <schema path="/org/gnome/shell/extensions/s_menu/" id="org.gnome.shell.extensions.s_menu">
 
     <key type="s" name="package-manager">
       <default>"null"</default>

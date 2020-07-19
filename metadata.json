@@ -1,6 +1,6 @@
 {
 	"description" : "Creates a small system utility window in the left side of the panel",
-	"name" : "Gnome System Menu - Dev",
+	"name" : "Gnome System Menu",
 	"shell-version" : [
 		"3.36"
 	],
