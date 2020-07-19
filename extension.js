@@ -6,11 +6,13 @@ const PanelMenu = imports.ui.panelMenu;
 const PopupMenu = imports.ui.popupMenu;
 const ThisExtension = imports.misc.extensionUtils.getCurrentExtension();
 const Util = imports.misc.util;
+const GLib = imports.gi;
 
 let myPopup;
-let packageManager;
+let packageManager = 'pamac-manager';
 
 //Get SettingsSchemaSource
+
 
 function getSettings() {
   let GioSSS = Gio.SettingsSchemaSource;
@@ -45,12 +47,10 @@ class MyPopup extends PanelMenu.Button {
       systemMonitor.connect('activate', () => Util.spawn(['gnome-system-monitor']));
 
       //Pamac
-      if(packageManager = !"null")
-      {
         let addRemove = new PopupMenu.PopupMenuItem('Add/Remove Software');
         this.menu.addMenuItem(addRemove);
         addRemove.connect('activate', () => Util.spawn([packageManager]));
-      };
+
         //Settings submenu
         let  settingsMenu = new PopupMenu.PopupSubMenuMenuItem('Settings');
         this.menu.addMenuItem(settingsMenu);
@@ -89,10 +89,10 @@ class MyPopup extends PanelMenu.Button {
           logout.connect('activate', () => Util.spawn(['gnome-session-quit' , '--logout']));
 
           //suspend
-        /*  let suspend = new PopupMenu.PopupMenuItem('Suspend');
-          sessionMenu.menu.addMenuItem(Suspend);
-          logout.connect('activate', () => Util.spawn(['systemctl', 'suspend']));
-        */
+          let suspend = new PopupMenu.PopupMenuItem('Suspend');
+          sessionMenu.menu.addMenuItem(suspend);
+          suspend.connect('activate', () => Util.spawn(['systemctl' , 'suspend']));
+
           //reboot
           let reboot = new PopupMenu.PopupMenuItem('Reboot');
           sessionMenu.menu.addMenuItem(reboot);
@@ -108,7 +108,8 @@ class MyPopup extends PanelMenu.Button {
 
 function init()
 {
-  packageManager = getSettings().get_string('package-manager');
+  packageManager = 'pamac-manager'
+  //packageManager = getSettings().get_string('package-manager');
 };
 
 function enable()

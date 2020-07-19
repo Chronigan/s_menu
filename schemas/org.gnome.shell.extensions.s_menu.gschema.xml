@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+
+  <schema id="org.gnome.shell.extensions.s_menu"
+    path="/org/gnome/shell/extensions/s_menu/">
+
+    <key type="s" name="package-manager">
+      <default>"null"</default>
+      <summary>Sets the Add/Remove software link to your package manager</summary>
+      <description>description</description>
+    </key>
+
+  </schema>
+
+</schemalist>
